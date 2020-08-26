@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d');
+
+		cvs.lineWidth = 100;
+		cvs.strokeStyle = 'red';
+		cvs.moveTo(200,200);
+		cvs.lineTo(400,200);
+		cvs.lineTo(400,400);
+
+		// 设置线两端样式
+		cvs.lineCap = 'butt';
+		cvs.lineCap = 'square';
+		cvs.lineCap = 'round';
+
+		// cvs.closePath();
+		cvs.stroke();
+
+		/*
+			lineCap:直线两个端点的样式,butt(默认,平角) 
+			square(方) round(圆),端点两边的长度是线宽的一半.
+
+			注意: 闭合路径不识别端点样式
+		 */
+
+	</script>
+
+</html>

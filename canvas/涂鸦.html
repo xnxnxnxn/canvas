@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas {
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+        您的浏览器版本太低。
+    </canvas>
+    <script>
+        function draw() {
+            var canvas = document.getElementById('canvas');
+            if (canvas.getContext) {
+                // 支持canvas
+                var context = canvas.getContext('2d');
+                canvas.onmousedown = function(event) {
+                var event =  event || window.event;
+
+                var x = event.clientX - canvas.offsetLeft;
+                var y = event.clientY - canvas.offsetTop;
+
+                context.strokeStyle = 'blue';
+                context.lineWidth = 10;
+                context.beginPath();
+                context.moveTo(x,y);
+
+                canvas.onmousemove =function(event){
+                    var event = event || window.event;
+
+                    var x = event.clientX - canvas.offsetLeft;
+                    var y = event.clientY - canvas.offsetTop;
+
+                    context.lineTo(x,y);
+                    context.stroke();
+                }
+                canvas.onmouseup = function(){
+                    canvas.onmousemove = "";
+                }
+            }
+            } else {
+                // 不支持canvas
+                alert('您的浏览器版本太低。');
+            }
+        }
+    
+    </script>
+</body>
+</html>

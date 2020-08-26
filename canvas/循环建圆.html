@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas {
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+        您的浏览器版本太低。
+    </canvas>
+    <script>
+        function draw() {
+            var canvas = document.getElementById('canvas');
+            if (canvas.getContext) {
+                // 支持canvas
+                var ctx = canvas.getContext('2d');
+                // 圆的组成：圆心（x,y） 半径 开始角度 结束角度 顺/逆时针
+                for (var i = 0; i < 4; i++) {
+                    for(var j = 0; j < 3; j++) {
+                        ctx.beginPath();
+                        var x = 25 + j * 50;
+                        var y = 25 + i * 50;
+                        var radius = 20;
+                        var startAngel = 0;
+                        var endAngel = Math.PI + (Math.PI * j) / 2;
+                        var anticlockwise = (i % 2) == 0 ? false : true;
+                        ctx.arc(x,y,radius,startAngel,endAngel,anticlockwise);
+                        if (i < 2) {
+                            ctx.stroke();
+                        } else {
+                            ctx.fill();
+                        }
+                    }
+                }
+
+            } else {
+                // 不支持canvas
+                alert('您的浏览器版本太低。');
+            }
+        }
+    
+    </script>
+</body>
+</html>

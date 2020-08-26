@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{border: 1px solid blue;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="400" height="400"></canvas>
+</body>
+
+<script>
+	var canvas = document.getElementById('cvs');
+	var context = canvas.getContext('2d');
+
+	var r = canvas.width / 2;
+	// 对原点x,y方向进行调整
+	context.translate(r,r);
+	context.rotate(-Math.PI/2);
+	// 表盘的背景
+	context.beginPath();
+	context.strokeStyle = "gray";
+	context.arc(0,0,r,0,Math.PI*2,true);
+	context.stroke();
+
+	// 刻度-小时
+	context.beginPath();
+	context.strokeStyle = "black";
+	context.lineWidth = 10;
+
+	var my_hour = Math.PI*2/12;
+	for (var i = 0; i < 12; i++) {
+		context.save();
+		context.rotate(i*my_hour);
+		context.moveTo(r-20,0);
+		context.lineTo(r,0);
+		context.stroke();
+		context.restore();
+	}
+
+	// 刻度-分钟
+	context.beginPath();
+	context.strokeStyle = "orange";
+	context.lineWidth = 5;
+
+	var my_minute = Math.PI*2/60;
+	var my_second = Math.PI*2/60;
+	for (var i = 0; i < 60; i++) {
+		if (i % 5 != 0) {
+			context.save();
+			context.rotate(i*my_minute);
+			context.moveTo(r-15,0);
+			context.lineTo(r,0);
+			context.stroke();
+			context.restore();
+		}
+	}
+
+	// 时针 / 分针 / 秒针
+	context.save();
+	var date = new Date();
+	var hour = date.getHours();
+	var minute = date.getMinutes();
+	var second = date.getSeconds();
+
+	// 时针
+	context.strokeStyle = 'red';
+	context.lineWidth = 20;
+
+	context.beginPath();
+	context.rotate(hour*my_hour+minute*my_minute/12+second*my_second/60/12);
+	context.moveTo(0,0);
+	context.lineTo(100,0);
+	context.stroke();
+	context.restore()
+
+	// 分针
+	context.save();
+	context.beginPath();
+	context.strokeStyle = "green";
+	context.lineWidth = 10;
+	context.rotate(minute*my_minute);
+	context.moveTo(0,0);
+	context.lineTo(130,0);
+	context.stroke();
+	context.restore();
+
+	// 秒针
+	context.save();
+	context.beginPath();
+	context.strokeStyle = 'yellow';
+	context.lineWidth = 5;
+	context.rotate(second*my_second);
+	context.moveTo(0,0);
+	context.lineTo(170,0);
+	context.stroke();
+	context.restore();
+
+	/*
+	  
+		分两部分画:
+
+		1.表盘背景 / 刻度-小时 / 刻度-分钟
+
+		2.时针 / 分针 / 秒针
+
+		arc / lineTo / translate / rotate / save / restore
+	 */
+
+</script>
+
+</html>

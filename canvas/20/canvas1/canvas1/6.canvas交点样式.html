@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d');
+
+		cvs.lineWidth = 100;
+		cvs.strokeStyle = 'red';
+		cvs.moveTo(200,200);
+		cvs.lineTo(400,200);
+		cvs.lineTo(400,400);
+
+		// 设置线两端样式
+		cvs.lineCap = 'butt';
+		cvs.lineCap = 'square';
+		cvs.lineCap = 'round';
+
+		// 设置交点样式
+		// cvs.lineJoin = 'bevel';
+		// cvs.lineJoin = 'miter';
+		cvs.lineJoin = 'round';
+
+		cvs.closePath();
+		cvs.stroke();
+
+		/*
+			lineJoin: 两个直线的交点角的样式
+				1.斜角 bevel
+				2.尖叫 miter (默认)
+				3.圆角 round
+		 */
+
+	</script>
+
+</html>

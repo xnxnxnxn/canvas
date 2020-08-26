@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	canvas{box-shadow: 0 0 10px #333;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1" width="300" height="300"></canvas>
+	<canvas id="canvas2" width="300" height="300"></canvas>
+	<canvas id="canvas3" width="300" height="300"></canvas>
+	<canvas id="canvas4" width="300" height="300"></canvas>
+</body>
+
+<script>
+	// 画布1
+	var canvas1 = document.getElementById('canvas1');
+	var context1 = canvas1.getContext('2d');
+
+	context1.beginPath();
+	context1.fillStyle = 'red';
+	context1.fillRect(50,50,100,100);
+
+	context1.globalCompositeOperation = "source-over";
+
+	/*
+		目标图像: 画布上已经存在的图像
+		源图像 : 即将往画布上画的图像 
+
+		分水岭: (设置globalCompositeOperation)之前的图像是目标图像,之后的图像是源图像
+
+		source-over: 源图像显示在目标图像的上面(默认值)
+	 */
+	 context1.fillStyle = 'green';
+	 context1.arc(150,150,50,0,Math.PI*2);
+	 context1.fill();
+
+	 // 画布2
+	 var canvas2 = document.getElementById('canvas2');
+	 var context2 = canvas2.getContext('2d');
+
+	 context2.beginPath();
+	 context2.fillStyle = 'red';
+	 context2.fillRect(50,50,100,100);
+
+	 context2.globalCompositeOperation = "source-atop";
+
+	 /*
+		source-atop: 源图像显示在目标图像的上面,只不过超出目标图像的部分不显示.
+	  */
+
+	 context2.fillStyle = 'green';
+	 context2.arc(150,150,50,0,Math.PI*2);
+	 context2.fill();
+
+	 // 画布3
+	 var canvas3 = document.getElementById('canvas3');
+	 var context3 = canvas3.getContext('2d');
+
+	 context3.beginPath();
+	 context3.fillStyle = 'red';
+	 context3.fillRect(50,50,100,100);
+
+	 context3.globalCompositeOperation = "source-in";
+
+	 /*
+		source-in: 显示source,但是只显示与目标图像重叠的部分.
+	  */
+
+	 context3.fillStyle = 'green';
+	 context3.arc(150,150,50,0,Math.PI*2);
+	 context3.fill();
+
+	 // 画布4
+	 var canvas4 = document.getElementById('canvas4');
+	 var context4 = canvas4.getContext('2d');
+
+	 context4.beginPath();
+	 context4.fillStyle = 'red';
+	 context4.fillRect(50,50,100,100);
+
+	 context4.globalCompositeOperation = "source-out";
+
+	 /*
+		source-out: 显示source,但是只显示与目标图像不重叠的部分.
+	  */
+
+	 context4.fillStyle = 'green';
+	 context4.arc(150,150,50,0,Math.PI*2);
+	 context4.fill();
+</script>
+
+</html>

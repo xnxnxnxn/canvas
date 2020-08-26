@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d');
+
+		cvs.lineWidth = 10;
+		cvs.strokeStyle = 'red';
+		cvs.moveTo(100,100);
+		cvs.lineTo(400,400);
+
+		cvs.stroke();
+
+		// 在画一个
+		cvs.beginPath();
+		cvs.lineWidth = 20;
+		cvs.strokeStyle = 'blue';
+		cvs.moveTo(200,100);
+		cvs.lineTo(500,400);
+
+		cvs.stroke();
+
+		/*
+			同一个路径中,只能设置一种样式,多次设置样式,后面的样式会覆盖前面的样式.
+
+			解决方法: 让路径不同
+
+			beginPath():创建一个新的路径,在画新图前先创建路径.
+		 */
+
+	</script>
+
+</html>

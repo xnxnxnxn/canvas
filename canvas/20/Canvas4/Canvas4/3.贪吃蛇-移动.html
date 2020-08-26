@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#canvas1{border: 1px solid red;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1" width="1200" height="600"></canvas>
+</body>
+<script>
+	/*
+		贪吃蛇步骤
+
+		1.先把蛇画出来
+			1.1 定义蛇的结构(构造方法:属性 方法)
+			1.2 给蛇添加移动的方法
+
+		2.让蛇动起来
+			2.1 使用定时器让蛇动起来
+			2.2 通过上下左右可以控制方向
+
+		3.食物的投放
+			3.1 随机投放食物(防止食物与蛇重叠)
+
+		4.吃食物
+			4.1 蛇头与食物的碰撞
+			4.2 身长增加
+
+		5.游戏结束
+			5.1 当蛇碰到四围的时候,游戏结束
+			5.2 当蛇碰到自身的时候,游戏结束
+	 */
+
+	 var canvas = document.getElementById('canvas1');
+	 var context = canvas.getContext('2d');
+
+	 // 为了画蛇头和蛇身做准备 画单个小方块
+	 function Rect(x,y,width,height,color){
+	 	this.x = x;
+	 	this.y = y;
+	 	this.width = width;
+	 	this.height = height;
+	 	this.color = color;
+
+	 	this.draw = function(){
+	 		context.beginPath();
+	 		context.fillStyle = this.color;
+	 		context.strokeStyle = 'blue';
+	 		context.fillRect(this.x,this.y,this.width,this.height);
+	 		context.strokeRect(this.x,this.y,this.width,this.height);
+	 	}
+	 }
+
+	 // 画蛇的整体部分
+	 function Snake(){
+	 	// 蛇头的具体位置和大小
+	 	this.head = new Rect(canvas.width/2-40,canvas.height/2-20,40,40,'red');
+
+	 	// 蛇身体的具体位置和大小
+	 	this.body = new Array();
+	 	var x = this.head.x - 40;
+	 	var y = this.head.y;
+	 	// 循环创建矩形,并放入身体数组中
+	 	for (var i = 0; i < 3; i++) {
+	 		var rect = new Rect(x,y,40,40,'gray');
+	 		this.body.push(rect);
+	 		x -= 40;
+	 	}
+
+	 	// 绘制蛇的方法
+	 	this.draw = function(){
+	 		// 绘制蛇头
+	 		this.head.draw();
+	 		// 绘制蛇身
+	 		for (var i = 0; i < this.body.length; i++) {
+	 			this.body[i].draw();
+	 		}
+	 	}
+
+	 	// 定义一个方向
+	 	this.direction = 3;
+
+	 	// 让蛇动起来
+	 	this.move = function(){
+	 		// 更新蛇的坐标
+	 		var rect = new Rect(this.head.x,this.head.y,this.head.width,this.head.height,'gray');
+	 		// 
+	 		this.body.splice(0,0,rect);
+
+	 		switch(this.direction){
+	 			case 0:{
+	 				this.head.y -= this.head.height;
+	 				break;
+	 			}
+	 			case 1:{
+	 				this.head.y += this.head.height;
+	 				break;
+	 			}
+	 			case 2:{
+	 				this.head.x -= this.head.width;
+	 				break;
+	 			}
+	 			case 3:{
+	 				this.head.x += this.head.width;
+	 				break;
+	 			}
+	 		}
+	 	}
+	 }
+
+	 var snake = new Snake();
+	 snake.draw();
+
+	 setInterval(animate,200);
+
+	 function animate(){
+	 	// 清除画布
+	 	context.clearRect(0,0,canvas.width,canvas.height);
+	 	// 更新图像位置
+	 	snake.move();
+	 	// 画蛇
+	 	snake.draw();
+	 }
+
+
+	 // 控制上下左右的方法
+	 document.onkeydown = function(event){
+	 	var event = event || window.event;
+
+	 	// 通过switch判断所点击的按钮
+	 	switch(event.keyCode){
+	 		case 37:{
+	 			snake.direction = 2;
+	 			break;
+	 		}
+	 		case 38:{
+	 			snake.direction = 0;
+	 			break;
+	 		}
+	 		case 39:{
+	 			snake.direction = 3;
+	 			break;
+	 		}
+	 		case 40:{
+	 			snake.direction = 1;
+	 			break;
+	 		}
+	 	}
+	 }
+</script>
+</html>

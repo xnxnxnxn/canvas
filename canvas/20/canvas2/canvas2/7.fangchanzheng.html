@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#canvas1{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1" width="549" height="412"></canvas>
+</body>
+
+<script>
+	var canvas = document.getElementById('canvas1');
+	var context = canvas.getContext('2d');
+
+	var image = new Image();
+	image.src = "img/fangchanzheng.jpg";
+
+	image.onload = function(){
+		context.drawImage(image,0,0);
+		// 处理文字
+		context.strokeStyle = "rgba(110,104,94,0.7)";
+		context.font = "10 Arial";
+		context.strokeText("吴海洋",177,120);
+		context.stoke();
+	}
+
+</script>
+</html>

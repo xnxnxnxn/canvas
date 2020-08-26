@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#test{width: 1px; height: 20px;background-color: red;}
+	</style>
+</head>
+<body>
+	<div id="test">0%</div>
+	<input type="button" value="开始" id="run">
+	<input type="button" value="停止" id="stop">
+</body>
+
+<script>
+	var button1 = document.getElementById('run');
+	var button2 = document.getElementById('stop');
+	var ele = document.getElementById('test');
+	var process1 = 0;
+	var stop = null;
+	button1.addEventListener('click',function(){
+		// 执行进度的方法
+		my_process();
+	},false);
+
+	button2.addEventListener('click',function(){
+		cancelAnimationFrame(stop); // 取消请求动画帧
+	});
+
+	function my_process(){
+
+		if (process1 >= 100) {
+			process1 = 0;
+		}else{
+			process1++;
+		}
+
+		ele.style.width = process1 + "%";
+		ele.innerHTML = process1 + "%";
+
+		if (process1 < 100) {
+
+			// 默认16.7ms执行一帧 优点:不会失帧  缺点: 没法设定动画时间
+			stop = requestAnimationFrame(my_process);
+		}
+	}
+
+</script>
+
+</html>

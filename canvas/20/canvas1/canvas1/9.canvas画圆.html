@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+	
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d');
+
+		// 画一个圆
+		cvs.strokeStyle = 'orange';
+		cvs.lineWidth = 10;
+
+		// 画圆方法
+		// cvs.arc(400,300,120,0,Math.PI); 			// 半圆
+		// cvs.arc(400,300,120,0,Math.PI*2);		// 整圆
+		// cvs.arc(400,300,120,0,Math.PI/2,true);// 顺1/4,逆3/4
+		cvs.arc(400,300,120,0,Math.PI*1.5,true); // 顺3/4,逆1/4
+
+
+		// 执行画圆
+		cvs.stroke();
+
+		
+
+		/*
+			画圆方法
+
+			arc(x,y,radius,startAngel,endAngel,anticlockwise);
+			arc(圆心x,圆心y,半径,开始的角度,结束的角度,是否逆时针);
+
+			圆弧默认以三点钟方向为起始点
+
+			问题: 使用4个不同颜色的1/4圆,组成一个完整的圆.
+		 */
+	</script>
+
+</html>

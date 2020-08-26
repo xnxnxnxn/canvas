@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#cvs{box-shadow: 0 0 10px #333;}
+	</style>
+</head>
+<body>
+	<video id="v1" src="img/HTML5的前世今生.mp4" autoplay></video>
+	<canvas id="cvs" width="672" height="378"></canvas>
+</body>
+
+<script>
+	var canvas = document.getElementById('cvs');
+	var context = canvas.getContext('2d');
+	var video = document.getElementById('v1');
+
+	function drawFrame(){
+		context.drawImage(video,0,0,canvas.width,canvas.height);
+	}
+
+	setInterval(drawFrame,50);
+
+
+</script>
+
+</html>

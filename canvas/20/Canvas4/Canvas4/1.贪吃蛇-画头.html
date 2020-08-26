@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#canvas1{border: 1px solid red;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1" width="1200" height="600"></canvas>
+</body>
+
+<script>
+	/*
+		贪吃蛇步骤
+
+		1.先把蛇画出来
+			1.1 定义蛇的结构(构造方法:属性 方法)
+			1.2 给蛇添加移动的方法
+
+		2.让蛇动起来
+			2.1 使用定时器让蛇动起来
+			2.2 通过上下左右可以控制方向
+
+		3.食物的投放
+			3.1 随机投放食物(防止食物与蛇重叠)
+
+		4.吃食物
+			4.1 蛇头与食物的碰撞
+			4.2 身长增加
+
+		5.游戏结束
+			5.1 当蛇碰到四围的时候,游戏结束
+			5.2 当蛇碰到自身的时候,游戏结束
+	 */
+
+	 var canvas = document.getElementById('canvas1');
+	 var context = canvas.getContext('2d');
+
+	 // 创建一个构造函数 (有属性 有方法)
+	 function Rect(x,y,width,height,color){
+	 	this.x = x;
+	 	this.y = y;
+	 	this.width = width;
+	 	this.height = height;
+	 	this.color = color;
+
+	 	this.draw = function(){
+	 		context.beginPath();
+	 		context.fillStyle = this.color;
+	 		context.strokeStyle = 'blue';
+	 		context.fillRect(this.x,this.y,this.width,this.height);
+	 		context.strokeRect(this.x,this.y,this.width,this.height);
+	 	}
+	 }
+
+	 var rect = new Rect(canvas.width/2-40,canvas.height/2-20,40,40,'red');
+	 rect.draw();
+
+
+
+</script>
+
+</html>

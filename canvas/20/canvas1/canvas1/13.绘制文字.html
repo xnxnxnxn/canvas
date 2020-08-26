@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+	
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d');
+
+		var linear = cvs.createLinearGradient(100,200,500,200);
+
+		linear.addColorStop(0.5,'orange');
+		linear.addColorStop(1,'blue');
+
+		// 阴影属性
+		cvs.shadowColor = 'green';
+		cvs.shadowBlur = 10;
+		cvs.shadowOffsetX = 20;
+		cvs.shadowOffsetY = 20;
+		
+		// 绘制文字
+		cvs.font = "bold italic 160px arial";
+		cvs.fillStyle = linear;
+		cvs.fillText("前端开发",100,200);
+		
+		/*
+			fillText(text,x,y); 文本,x,y
+
+			font: 设置文本样式
+
+			font-weight font-style font-size font-family
+
+			注意: 头两个属性可以互相交换,但后两个位置不能改变
+		 */
+	</script>
+
+</html>

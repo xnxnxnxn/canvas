@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+	
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d');
+
+		var color = ['red','blue','green','orange'];
+
+		for (var i = 0; i < 4; i++) {
+			cvs.beginPath();
+
+			cvs.lineWidth = 50;
+
+			cvs.strokeStyle = color[i];
+			
+			// 点1: 3点钟 点2: 6点钟 点3: 9点钟 点4: 12点钟
+			cvs.arc(400,300,150,Math.PI/2*i,Math.PI/2*(i+1));
+
+			cvs.stroke();
+		}
+		/*
+			a
+		 */
+	</script>
+
+</html>

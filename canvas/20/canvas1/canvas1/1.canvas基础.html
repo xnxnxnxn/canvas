@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;
+		/*width: 400px;height: 400px;*/
+	}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600">
+		<!-- 当浏览器不支持canvas标签时,写在标签中的内容将被显示出来,如果支持,就会将内容覆盖 -->
+		<span>该换浏览器了,您的浏览器版本太low.</span>
+	</canvas>
+</body>
+	
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d');
+
+		cvs.moveTo(100,100);
+		cvs.lineTo(100,80);
+
+		cvs.lineWidth = 10;
+
+		cvs.stroke();
+
+
+		console.log(canvas.width + " " + canvas.height);
+
+		/* 
+			canvas标签本身不提供任何的绘画功能,只是一个画布,
+			所有的绘画功能都需要依靠javascript来实现.
+
+			canvas的默认宽高是300 * 150,通过标签上的属性,width/height来设定宽高.如果通过css设置canvas宽高属性的话,画布会变形(失帧)
+
+			canvas默认是一个透明画布
+
+			问题: getContext()是什么? 2d是什么?
+		 */
+	</script>
+
+
+
+
+
+
+</html>

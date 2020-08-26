@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			canvas {
+				box-shadow: 0 0 20px black;
+				margin: 50px;
+			}
+
+			table {
+				border-collapse: collapse;
+				position: absolute;
+				top: 50px;
+				left: 50px;
+			}
+
+			table td {
+				width: 49px;
+				height: 49px;
+				border: 1px dotted #ccc;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="" width="500" height="500">
+			您的浏览器不支持canvas
+		</canvas>
+		<table>
+		</table>
+		<br />
+		边数:<input type="range" name="" id="polygon" max=32 min=5 value="5"/>
+		半径：<input type="range" id="outRadius" max="200" min="100" value="100"/>
+		是否包含内部：<input type="checkbox"  id="inner" />
+		内部半径:<input type="range" id="innerRadius" max="300" min="100" value="100"/>
+		旋转：<input type="range" id="angle" max="90" min="0" value="0"/>
+		<br />
+	</body>
+	<script type="text/javascript">
+		var polygon = document.querySelector("#polygon");
+		var oRadius = document.querySelector("#outRadius");
+		var isInner = document.querySelector("#inner");
+		var innerRadius = document.querySelector("#innerRadius");
+		var angle = document.querySelector("#angle");
+		polygon.onchange = function(){
+			draw(polygon.value,oRadius.value,isInner.checked,innerRadius.value,angle.value)
+		}
+		oRadius.onchange = function(){
+			draw(polygon.value,oRadius.value,isInner.checked,innerRadius.value,angle.value)
+		}
+		isInner.onchange = function(){
+			draw(polygon.value,oRadius.value,isInner.checked,innerRadius.value,angle.value)
+		}
+		innerRadius.onchange = function(){
+			draw(polygon.value,oRadius.value,isInner.checked,innerRadius.value,angle.value)
+		}
+		angle.onchange = function(){
+			draw(polygon.value,oRadius.value,isInner.checked,innerRadius.value,angle.value)
+		}
+		var table = document.querySelector("table");
+		for (var i = 0; i < 10; i++) {
+			var tr = document.createElement("tr");
+			for (var j = 0; j < 10; j++) {
+				var td = document.createElement("td");
+				tr.appendChild(td);
+			}
+			table.appendChild(tr);
+		}
+		var canvas = document.querySelector("canvas");
+		var ctx = canvas.getContext("2d");
+		var r = 200;
+		var cx = 250,
+			cy = 250;
+		var dig = 2 * Math.PI / 5;
+		//		ctx.moveTo(cx,cy)
+		//		ctx.moveTo(Math.cos(dig)*r+cx,Math.sin(dig)*r+cy);
+		//		ctx.lineTo(Math.cos(dig*2)*r+cx,Math.sin(dig*2)*r+cy)
+		//		ctx.lineTo(Math.cos(dig*3)*r+cx,Math.sin(dig*3)*r+cy)
+		//		ctx.lineTo(Math.cos(dig*4)*r+cx,Math.sin(dig*4)*r+cy)
+		//		ctx.lineTo(Math.cos(dig*5)*r+cx,Math.sin(dig*5)*r+cy)
+//		ctx.moveTo(0, 200);
+//		ctx.lineTo(500, 200);
+//		ctx.stroke();
+//		ctx.moveTo(200, 0);
+//		ctx.lineTo(200, 500)
+//		ctx.stroke()
+		draw(5,200,false,100,0)
+
+		function draw(polygon,radius,isInner,innerRadius,rot) {
+			ctx.clearRect(0,0,500,500);
+			ctx.beginPath()
+			var deg = 360 / polygon;
+			innerRadius = isInner ? innerRadius : 0;
+			var innerDeg = deg / 2;
+			for (var i = 0; i < polygon; i++) {
+				ctx.lineTo(
+					Math.cos((i * deg +rot*1) / 180 * Math.PI) * radius + cx,
+					Math.sin((i * deg+rot*1) / 180 * Math.PI) * radius + cy
+				);
+				if (innerRadius > 0) {
+					ctx.lineTo(
+						Math.cos((innerDeg + i * deg +rot*1) / 180 * Math.PI) * innerRadius + cx,
+						Math.sin((innerDeg + i * deg +rot*1) / 180 * Math.PI) * innerRadius + cy
+					)
+				}
+			}
+			ctx.closePath()
+			ctx.stroke()
+		}
+	</script>
+
+</html>

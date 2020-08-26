@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#cvs{box-shadow: 0 0 10px #333;}
+	video{vertical-align: top;}
+	</style>
+</head>
+<body>
+	<video id="v1" width="460" src="img/HTML5的前世今生.mp4" autoplay></video>
+
+	<canvas id="cvs" width="460" height="400"></canvas>
+
+</body>
+
+<script>
+	var canvas = document.getElementById('cvs');
+	var cvs = canvas.getContext('2d');
+	var vi = document.getElementById('v1');
+
+	document.onclick = function(){
+		cvs.drawImage(vi,100,200,400,260,0,0,400,260);
+	}
+</script>
+</html>

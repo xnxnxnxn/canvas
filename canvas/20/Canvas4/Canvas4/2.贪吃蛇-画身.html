@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#canvas1{border: 1px solid red;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1" width="1200" height="600"></canvas>
+</body>
+<script>
+	/*
+		贪吃蛇步骤
+
+		1.先把蛇画出来
+			1.1 定义蛇的结构(构造方法:属性 方法)
+			1.2 给蛇添加移动的方法
+
+		2.让蛇动起来
+			2.1 使用定时器让蛇动起来
+			2.2 通过上下左右可以控制方向
+
+		3.食物的投放
+			3.1 随机投放食物(防止食物与蛇重叠)
+
+		4.吃食物
+			4.1 蛇头与食物的碰撞
+			4.2 身长增加
+
+		5.游戏结束
+			5.1 当蛇碰到四围的时候,游戏结束
+			5.2 当蛇碰到自身的时候,游戏结束
+	 */
+
+	 var canvas = document.getElementById('canvas1');
+	 var context = canvas.getContext('2d');
+
+	 // 为了画蛇头和蛇身做准备 画单个小方块
+	 function Rect(x,y,width,height,color){
+	 	this.x = x;
+	 	this.y = y;
+	 	this.width = width;
+	 	this.height = height;
+	 	this.color = color;
+
+	 	this.draw = function(){
+	 		context.beginPath();
+	 		context.fillStyle = this.color;
+	 		context.strokeStyle = 'blue';
+	 		context.fillRect(this.x,this.y,this.width,this.height);
+	 		context.strokeRect(this.x,this.y,this.width,this.height);
+	 	}
+	 }
+
+	 // 画蛇的整体部分
+	 function Snake(){
+	 	// 蛇头的具体位置和大小
+	 	this.head = new Rect(canvas.width/2-40,canvas.height/2-20,40,40,'red');
+
+	 	// 蛇身体的具体位置和大小
+	 	this.body = new Array();
+	 	var x = this.head.x - 40;
+	 	var y = this.head.y;
+	 	// 循环创建矩形,并放入身体数组中
+	 	for (var i = 0; i < 3; i++) {
+	 		var rect = new Rect(x,y,40,40,'gray');
+	 		this.body.push(rect);
+	 		x -= 40;
+	 	}
+
+	 	// 绘制蛇的方法
+	 	this.draw = function(){
+	 		// 绘制蛇头
+	 		this.head.draw();
+	 		// 绘制蛇身
+	 		for (var i = 0; i < 3; i++) {
+	 			this.body[i].draw();
+	 		}
+	 	}
+	 }
+
+	 var snake = new Snake();
+	 snake.draw();
+
+</script>
+</html>

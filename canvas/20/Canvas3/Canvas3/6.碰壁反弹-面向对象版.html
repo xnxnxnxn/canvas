@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#canvas1{border: 1px solid #333;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1" width="800" height="500"></canvas>
+</body>
+
+<script>
+	var canvas = document.getElementById('canvas1');
+	var context = canvas.getContext('2d');
+
+	// 构造函数 / this / new / 属性 / prototype
+	function Ball(x,y,r,speedX,speedY,color){
+		// 属性
+		this.x = x;
+		this.y = y;
+		this.r = r;
+		this.speedX = speedX;
+		this.speedY = speedY;
+		this.color = color;
+
+		// 方法 - 画圆
+		this.draw = function(){
+			context.beginPath();
+			context.fillStyle = this.color;
+			context.arc(this.x,this.y,this.r,0,Math.PI*2);
+			context.fill();
+		}
+
+		// 方法 - 移动
+		this.move = function(){
+			this.x += this.speedX;
+
+			if (this.x > canvas.width - this.r) {
+				this.speedX *= -1;
+			}else if (this.x < this.r) {
+				this.speedX *= -1;
+			}
+
+			this.y += this.speedY;
+			if (this.y > canvas.height - this.r) {
+				this.speedY *= -1;
+			}else if (this.y < this.r) {
+				this.speedY *= -1;
+			}
+		}
+	}
+
+	var ball = new Ball(50,50,50,2,2,'orange');
+	ball.draw();
+	// 动画理念: 
+	function doMove(){
+		context.clearRect(0,0,canvas.width,canvas.height);
+		ball.draw();
+		ball.move();
+
+		requestAnimationFrame(doMove);
+	}
+
+	doMove();
+
+</script>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	canvas{box-shadow: 0 0 10px #333;}
+	</style>
+</head>
+<body>
+	
+	<canvas id="c2" width="500" height="400"></canvas>
+	<canvas id="cvs" width="500" height="400"></canvas>
+	
+</body>
+
+<script>
+	 var canvas = document.getElementById('cvs');
+	 var c2 = document.getElementById('c2');
+
+	 var cvs = canvas.getContext('2d');
+	 var cvs2 = c2.getContext('2d');
+
+	 cvs2.beginPath();
+	 cvs2.fillStyle = 'red';
+	 cvs2.fillRect(100,100,200,200);
+
+	 cvs.drawImage(c2,0,0);
+</script>
+
+</html>

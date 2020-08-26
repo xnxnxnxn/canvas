@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+	
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d');
+
+		// 创建渐变的对象的方向
+		var radial = cvs.createRadialGradient(400,300,80,400,300,130);
+		
+
+		// 设置渐变的起点和终点
+		radial.addColorStop(0,'red');
+		radial.addColorStop(0.1,'orange');
+		radial.addColorStop(0.5,'green');
+		radial.addColorStop(0.9,'blue');
+		radial.addColorStop(1,'transparent');
+
+		// 绘制矩形
+		cvs.beginPath();
+		cvs.fillStyle = radial;
+		cvs.fillRect(150,150,500,500);
+		
+		/*
+			RadialGradient(起点圆心x,起点圆心y,圆半径,终点圆心x,终点圆心y,终点圆半径);
+
+			从里往外渐变: 起点圆小于终点圆
+			从外往里渐变: 起点圆大于终点圆
+		 */
+	</script>
+
+</html>

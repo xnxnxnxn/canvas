@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+	
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d');
+
+		// 画一个框
+		cvs.strokeStyle = 'red';
+		cvs.lineWidth = 10;
+		cvs.lineJoin = 'round';
+		cvs.strokeRect(150,150,300,300);
+
+		// 画一个填充的矩形
+		cvs.beginPath();
+		cvs.fillStyle = 'orange';
+		cvs.fillRect(160,160,280,280);
+
+		/*
+			strokeRect(x,y,width,height);
+
+			fillRect(x,y,width,height);
+
+			问题: 怎样画一个圆?
+		 */
+	</script>
+
+</html>

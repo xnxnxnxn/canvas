@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#canvas1{border: 1px solid red;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1" width="800" height="300"></canvas>
+</body>
+
+<script>
+	var canvas = document.getElementById('canvas1');
+	var context = canvas.getContext('2d');
+
+	function Rect(x,y,width,height,color,speed){
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.color = color;
+		this.speed = speed;	
+	}
+
+	Rect.prototype.draw = function(){
+		context.beginPath();
+		context.fillStyle = this.color;
+		context.fillRect(this.x,this.y,this.width,this.height);
+	}
+
+	Rect.prototype.move = function(){
+		this.x += this.speed;
+		if (this.x >= canvas.width - this.width) {
+			this.speed *= -1;
+		}else if (this.x < 0) {
+			this.speed *= -1;
+		}
+	}
+
+	var rect1 = new Rect(0,100,100,100,'orange',2);
+	var rect2 = new Rect(700,100,100,100,'blue',-2);
+	// rect1.draw();
+	// rect2.draw();
+
+	function animate(){
+		context.clearRect(0,0,canvas.width,canvas.height);
+
+		// 如果碰撞上,那么往回走
+		if (isZhuang()) {
+			rect1.speed *= -1;
+			rect2.speed *= -1;
+		}
+		rect1.draw();
+		rect2.draw();
+		rect1.move();
+		rect2.move();
+		
+
+		requestAnimationFrame(animate);
+	}
+
+	animate();
+
+	// 判断矩形是否相撞
+	function isZhuang(){
+		// 左边矩形的右坐标
+		var x1 = rect1.x + rect1.width;
+
+		// 右边矩形的左坐标
+		var x2 = rect2.x;
+	
+		if (x1 > x2) {
+			return true;
+		}else{
+			return false;
+		}
+
+		// var minX1 = rect1.x; // 0 
+		// var minX2 = rect2.x; // 700
+
+		// var maxX1 = rect1.x + rect1.width; // 100
+		// var maxX2 = rect2.x + rect2.width; // 800
+		// //  700			     // 0    700
+		// var minX3 = Math.max(minX1,minX2);
+		// //  100               100   800
+		// var maxX3 = Math.min(maxX1,maxX2);
+
+		// if (minX3 < maxX3) {
+		// 	return true;
+		// }else{
+		// 	return false;
+		// }
+	}
+
+
+</script>
+
+</html>

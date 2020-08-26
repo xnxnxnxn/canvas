@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d'); // 画笔
+
+		cvs.moveTo(0,0);
+		cvs.lineTo(200,200);
+		cvs.lineWidth = 10;
+		cvs.stroke();
+
+		/*
+			getContext(): 获取绘画的上下文(俗称画笔)
+			一个canvas画布,只能有一个画笔(绘画上下文)
+
+			2d: 目前canvas只支持2d平面视图
+
+			canvas是以左上角为坐标原点(x0,y0)
+
+			moveTo(x,y); 画笔的开始点
+			lineTo(x,y); 画笔的结束点
+
+			stroke(); 	 画笔连接开始点和结束点
+
+			思考: 通过线画出一个矩形.
+		 */
+	</script>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#canvas1{border: 1px solid #333;}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1" width="320" height="568"></canvas>
+</body>
+	
+<script>
+	var canvas = document.getElementById('canvas1');
+	var context = canvas.getContext('2d');
+
+	var y = 0;
+
+	function draw(){
+		// 保存状态
+		context.save();
+		// 清楚画布
+		context.clearRect(0,0,canvas.width,canvas.height);
+		// 移动
+		context.translate(0,y);
+		context.drawImage(backgroundImage,0,0);
+		context.drawImage(backgroundImage,0, - (canvas.height - 1));
+
+		y += 20;
+		if (y >= canvas.height) {
+			y = 0;
+		}
+		// 释放状态
+		context.restore();
+		requestAnimationFrame(draw);
+	}
+
+	var backgroundImage = new Image();
+	backgroundImage.onload = function(){
+		draw();
+	}
+
+	backgroundImage.src = "./img/background.png";
+
+</script>
+
+</html>

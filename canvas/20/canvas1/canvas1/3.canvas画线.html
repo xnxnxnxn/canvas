@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d');
+
+		cvs.lineWidth = 10;
+		cvs.strokeStyle = 'red';
+
+		cvs.moveTo(100,100);
+		cvs.lineTo(300,100);
+		cvs.lineTo(300,300);
+		cvs.lineTo(100,300);
+		cvs.lineTo(100,300);
+
+		cvs.closePath();
+		cvs.stroke();
+
+		cvs.lineWidth = 5;
+		cvs.strokeStyle = 'blue';
+
+		cvs.moveTo(200,200);
+		cvs.lineTo(400,200);
+		cvs.lineTo(400,400);
+		cvs.lineTo(200,400);
+		cvs.lineTo(200,200);
+
+		cvs.closePath();
+		cvs.stroke();
+		/*
+			canvas是以路径的方法进行绘画.
+
+			stroke()是在剧中的位置开始画,如果画一个10px,会以中心点向两边的方向绘画.
+
+			closePath():闭合路径,将路径的开始位置和结束位置进行闭合.
+
+			strokeStyle: 确定笔的颜色,在画之前确定.
+
+			问题: 如何让不同的路径有不同的域?
+		 */
+
+	</script>
+
+</html>

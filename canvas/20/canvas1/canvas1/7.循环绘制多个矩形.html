@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+
+	<script>
+		var canvas = document.getElementById('cvs');
+		var cvs = canvas.getContext('2d');
+
+		var color = ['red','blue','green','orange'];
+
+		for (var i = 0; i < 4; i++) {
+			cvs.beginPath();
+
+			cvs.moveTo(200+20*i,100+20*i);
+			cvs.lineTo(200+20*i,400+20*i);
+			cvs.lineTo(500+20*i,400+20*i);
+			cvs.lineTo(500+20*i,100+20*i);
+			cvs.lineTo(200+20*i,100+20*i);
+
+			// 设置颜色
+			cvs.fillStyle = color[i];
+			cvs.fill();
+		}
+
+		/*
+			问题: 有画线的方法,有没有直接画矩形和圆形的方法.
+		 */
+
+	</script>
+
+</html>

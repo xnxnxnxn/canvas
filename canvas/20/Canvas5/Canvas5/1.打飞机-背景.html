@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin: 0;}
+	canvas{box-shadow: 0 0 10px #333;}
+	</style>
+</head>
+<body>
+	<canvas id="backgroundCanvas" width="320" height="568"></canvas>
+</body>
+	
+	<script src="js/background.js"></script>
+
+<script>
+	/*
+		思考问题: 将图片画到画布上之前,有一个不要条件,图片一定是加载完成的
+	 */
+
+	 var bgURL = "img/background.png";
+	 var bgCanvas = document.getElementById('backgroundCanvas');
+
+	 loadBackground(bgURL,bgCanvas,moveBackground);
+
+	 function moveBackground(bgImage){
+	 	// 处理背景音乐
+	 	var bgSound = new Audio("audio/game_music.mp3");
+	 	bgSound.loop = true;
+	 	bgSound.play();
+
+	 	// 做背景移动
+	 	setInterval(function(){
+	 		// 处理移动的方法
+	 		//var v = 5;
+	 		//drawBackground(bgCanvas,bgImage,v);
+	 	},30);
+	 }
+
+</script>
+</html>

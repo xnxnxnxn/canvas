@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+            padding-top: 20px;
+        }
+        canvas {
+            box-shadow: 0 0 10px #333;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body onload="draw()">
+    <canvas id="canvas" width="800" height="600">
+        您的浏览器版本太低。
+    </canvas>
+    <script>
+        function draw() {
+            var canvas = document.getElementById('canvas');
+            if (canvas.getContext) {
+                // 支持canvas
+                var ctx = canvas.getContext('2d');
+
+
+                // 填充
+                // 绘制一个填充的矩形
+                // fillRect(x,y,width,height)
+                // ctx.fillStyle = 'rgb(200,0,0)'
+                // ctx.fillRect(10,10,350,300);
+
+                
+               
+                // ctx.fillStyle = 'rgba(0,0,200,0.5)'
+                // ctx.fillRect(30,30,350,300);
+
+                // 描边
+                // 绘制一个描边的矩形
+                // strokeRect(x,y,width,height)
+                ctx.strokeStyle = 'rgb(200,0,0)'
+                ctx.strokeRect(10,10,350,300);
+
+                ctx.strokeStyle = 'rgba(0,0,200,0.5)'
+                ctx.strokeRect(30,30,350,300);
+            } else {
+                // 不支持canvas
+                alert('您的浏览器版本太低。');
+            }
+        }
+    
+    </script>
+</body>
+</html>

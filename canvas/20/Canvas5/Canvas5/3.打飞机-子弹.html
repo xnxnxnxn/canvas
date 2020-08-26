@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	 <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<title>Document</title>
+	<style>
+	*{margin: 0;}
+	canvas{box-shadow: 0 0 10px #333;}
+	#heroCanvas{position: absolute;left: 0;top: 0;}
+	#bulletCanvas{position: absolute;left: 0;top: 0;}
+	</style>
+</head>
+<body>
+	<!-- 背景画布 -->
+	<canvas id="backgroundCanvas" width="320" height="568"></canvas>
+	<!-- 子弹画布 -->
+	<canvas id="bulletCanvas" width="320" height="568"></canvas>
+	<!-- 主角画布 -->
+	<canvas id="heroCanvas" width="320" height="568"></canvas>
+	
+
+</body>
+	
+	<script src="js/background.js"></script>
+	<script src="js/hero.js"></script>
+
+<script>
+	/*
+		思考问题: 将图片画到画布上之前,有一个不要条件,图片一定是加载完成的
+	 */
+
+	 var bgURL = "img/background.png";
+	 var bgCanvas = document.getElementById('backgroundCanvas');
+
+	 loadBackground(bgURL,bgCanvas,moveBackground);
+
+	 function moveBackground(bgImage){
+	 	// 处理背景音乐
+	 	var bgSound = new Audio("audio/game_music.mp3");
+	 	bgSound.loop = true;
+	 	bgSound.play();
+
+	 	// 做背景移动
+	 	setInterval(function(){
+	 		// 处理移动的方法
+	 		var v = 5;
+	 		drawBackground(bgCanvas,bgImage,v);
+	 	},30);
+
+	 	// 创建主角
+	 	var heroCanvas = document.getElementById('heroCanvas');
+	 	var heroContext = heroCanvas.getContext('2d');
+
+	 	// 使用方法创建主角
+	 	var hero = createHero(66,82,heroCanvas,"img/herofly.png",heroLoaded);
+	 	// 主角创建完成
+	 	function heroLoaded(image){
+	 		// 1.绘制主角
+	 		hero.draw(heroCanvas);
+	 		// 2.主角动画
+	 		setInterval(function(){
+	 			heroContext.clearRect(0,0,320,568);
+	 			hero.draw(heroCanvas);
+	 		},30);
+	 	}
+
+	 	// 获取子弹画布
+	 	var bCanvas = document.getElementById('bulletCanvas');
+	 	var bContext = bCanvas.getContext('2d');
+
+	 	// 创建子弹宽高
+	 	var bWidth = 48;
+	 	var bHeight = 14;
+	 	var bURL = "img/bullet2.png";
+	 	var bulletArray = new Array();
+
+	 	// 发子弹
+	 	setInterval(function(){
+	 		// 创建子弹
+	 		var bullet = createBullet(hero,bWidth,bHeight,bURL);
+	 		// 将每次创建出来的子弹,存入到数组中
+	 		bulletArray.push(bullet);
+	 		// 验证数组中是否有值
+	 		console.log("子弹的数量是:" + bulletArray.length);
+	 	},200);
+
+	 	// 子弹移动
+	 	setInterval(function(){
+	 		bContext.clearRect(0,0,320,568);
+	 		for (var i = 0; i < bulletArray.length; i++) {
+	 			// 判断: 当子弹超出屏幕之后,将超出的子弹在数组中干掉
+	 			if (bulletArray[i].isOutScreen()) {
+	 				bulletArray.splice(i,1);
+	 			} 
+
+	 			bulletArray[i].move();
+	 			bulletArray[i].draw(bCanvas);
+	 		}
+	 	},20);
+	 }
+</script>
+</html>

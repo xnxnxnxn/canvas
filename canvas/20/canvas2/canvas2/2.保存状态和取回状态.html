@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{text-align: center;padding-top: 20px;}
+	#cvs{box-shadow: 0 0 10px #333;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<canvas id="cvs" width="800" height="600"></canvas>
+</body>
+
+<script>
+	var canvas = document.getElementById('cvs');
+	var cvs = canvas.getContext('2d');
+
+	cvs.beginPath();
+	cvs.strokeStyle = 'blue';
+	cvs.lineWidth = 10;
+	cvs.save();
+	cvs.strokeRect(100,100,200,150);
+
+	cvs.beginPath();
+	cvs.strokeStyle = 'red';
+	cvs.lineWidth = 1;
+	cvs.save();
+	cvs.strokeRect(100,300,200,150);
+
+	cvs.beginPath();
+	cvs.restore(); // red
+	cvs.strokeRect(400,100,200,150);
+
+	cvs.beginPath();
+	cvs.restore(); // blue
+	cvs.strokeRect(400,300,200,150);
+
+
+	/*
+		save(): 将当前画笔的状态(属性)保存.可以多次调用save()方法,,每调用一次就会存储一个状态(以栈的形式存储)
+
+		restore(): 恢复到上一次save()所保存的画笔状态,可以多次调用restore()()方法,每调用一次,就会从栈存储中取出一个save的状态.
+
+		注意: 如果没有save()状态,restore()就不会有任何效果 
+	 */
+
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{padding-top: 20px;}
+	canvas,img{box-shadow: 0 0 10px #333; vertical-align: top;}
+	</style>
+</head>
+<body>
+	<img id="pic" src="img/beautiful.jpg" alt="">
+	<canvas id="cvs" width="500" height="400"></canvas>
+</body>
+	
+<script>
+	var canvas = document.getElementById('cvs');
+	var img = document.getElementById('pic');
+	var cvs = canvas.getContext('2d');
+
+	// 必须等图片加载完成之后,才可以绘制到canvas画布上.
+	img.onload = function() {
+		// cvs.drawImage(img,0,0);
+		// cvs.drawImage(img,100,100);
+
+		/*
+			drawImage(图像,开始绘制点x,开始绘制点y);
+		 */
+
+		// cvs.drawImage(img,0,0,300,200); 
+		// cvs.drawImage(img,50,50,300,200); 
+
+		/*
+		  	drawImage(图像,开始绘制点x,开始绘制点y,width,height);
+		 */
+
+		 cvs.drawImage(img,80,120,100,150,50,50,100,150);
+
+		 /*
+			1.图像
+
+			2.提取图像的x坐标
+			3.提取图像的y坐标
+			4.提取图像的宽度
+			5.提取图像的高度
+	
+			6.绘制的x坐标
+			7.绘制的y坐标
+			8.缩放的宽度
+			9.缩放的高度
+		  */
+
+		  /*
+			 问题: canvas能绘制图片,但能否绘制canvas的图像?
+		   */
+	}
+
+</script>
+
+</html>
